@@ -1,5 +1,4 @@
 package main.java.Driver;
-import main.java.Edges;
 import main.java.Vertices;
 
 public class AISearchDriver {
