@@ -2,7 +2,7 @@ package main.java;
 
 import java.util.HashSet;
 
-public class Edge {
+public class Edge{
     private EdgeType type;
     private EdgeColor color;
 
@@ -42,5 +42,10 @@ public class Edge {
             }
         }
         return false;
+    }
+
+
+    public int hashCode(){
+        return type.hashCode();
     }
 }
