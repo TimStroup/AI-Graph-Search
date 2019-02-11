@@ -4,22 +4,41 @@ import java.util.HashSet;
 
 public class EdgeSet {
 
-    private HashSet<Edge> edges;
+    private HashSet<Edge> availableEdges;
+    private HashSet<Edge> selectedEdges;
 
 
     public EdgeSet(){
-        edges = new HashSet<>();
-
+        availableEdges = new HashSet<>();
+        selectedEdges = new HashSet<>();
         for(EdgeType type: EdgeType.values()){
-            edges.add(new Edge(type));
+            availableEdges.add(new Edge(type));
         }
     }
 
-    public boolean checkForTriangle(){
-        for(Edge edge : edges){
-            for(Edge connectedEdge : edge.connectedEdges){
-                if(connectedEdge.connectedEdges.contains(edge)){
-                    return true;
+    public boolean selectEdge(Edge edge){
+        if(availableEdges.contains(edge)){
+            selectedEdges.add(edge);
+            availableEdges.remove(edge);
+            return true;
+        }
+        return false;
+    }
+
+    //looks for a triangle from the selected edges
+    public boolean checkForTriangle(EdgeColor  color){
+        for(Edge edge : selectedEdges){
+            if(edge.getColor() == color){
+                for(Edge connectedEdge : edge.connectedEdges){
+                    if(connectedEdge.getColor() == color){
+                        for(Edge thirdEdge : connectedEdge.connectedEdges){
+                            if(thirdEdge.getColor() == color){
+                                if(connectedEdge.connectedEdges.contains(edge)){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
