@@ -16,10 +16,20 @@ public class EdgeSet {
         }
     }
 
-    public boolean selectEdge(Edge edge){
-        if(availableEdges.contains(edge)){
-            selectedEdges.add(edge);
-            availableEdges.remove(edge);
+    public boolean noneAvailable(){
+        return availableEdges.isEmpty();
+    }
+
+    public Object[] getAvailable(){
+        return availableEdges.toArray();
+    }
+
+    public boolean selectEdge(EdgeType type, EdgeColor color){
+        Edge newEdge = new Edge(type);
+        if(availableEdges.contains(newEdge)){
+            newEdge.setColor(color);
+            selectedEdges.add(newEdge);
+            availableEdges.remove(newEdge);
             return true;
         }
         return false;

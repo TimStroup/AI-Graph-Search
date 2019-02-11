@@ -19,6 +19,8 @@ public class Edge {
         connectedEdges.add(edge);
     }
 
+    public boolean disconnectEdge(Edge edge){ return connectedEdges.remove(edge);}
+
     public void setColor(EdgeColor color) {
         this.color = color;
     }
